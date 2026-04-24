@@ -6,10 +6,10 @@
     <link href='https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap' rel='stylesheet'>
     <style>
         :root {
-            --neon-red: #ff003c;
-            --neon-gold: #FFD700;
-            --dark-bg: #1a0005;
-            --body-gradient: linear-gradient(135deg, #33000b 0%, #1a0005 50%, #0a0002 100%);
+            --neon-blue: #00d4ff;
+            --neon-gold: #00ffff;
+            --dark-bg: #0a0520;
+            --body-gradient: linear-gradient(135deg, #0f1a3d 0%, #0a0520 50%, #050210 100%);
         }
 
         * {
@@ -36,13 +36,13 @@
             height: 60px;
             background: var(--body-gradient);
             border-radius: 50%;
-            border: 2px solid var(--neon-red);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.9), 0 0 15px rgba(255, 0, 60, 0.6);
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 30px var(--neon-blue), 0 0 60px rgba(0, 212, 255, 0.5), 0 10px 20px rgba(0,0,0,0.9);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            animation: float 3s ease-in-out infinite;
+            animation: float 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
             overflow: hidden;
         }
 
@@ -51,6 +51,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0.9;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
         }
 
         #main {
@@ -58,13 +59,13 @@
             background: var(--body-gradient);
             border-radius: 20px;
             padding: 12px;
-            border: 1.5px solid var(--neon-red);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 15px rgba(255,0,60,0.4), inset 0 0 20px rgba(255,0,60,0.3);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 40px var(--neon-blue), 0 0 80px rgba(0, 212, 255, 0.4), 0 20px 50px rgba(0,0,0,0.9), inset 0 0 30px rgba(0, 212, 255, 0.2);
             display: none;
             flex-direction: column;
             position: relative;
             margin: auto;
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, mainGlow 3s ease-in-out infinite;
         }
 
         #main::before {
@@ -75,11 +76,11 @@
             transform: translateX(-50%);
             width: 90px;
             height: 18px;
-            background: linear-gradient(180deg, #220008, #0a0002);
+            background: linear-gradient(180deg, #0f1a3d, #050210);
             border-radius: 12px 12px 0 0;
-            border: 1.5px solid var(--neon-red);
+            border: 2px solid var(--neon-blue);
             border-bottom: none;
-            box-shadow: 0 -5px 10px rgba(255,0,60,0.2);
+            box-shadow: 0 -10px 20px rgba(0, 212, 255, 0.3);
             z-index: -1;
         }
 
@@ -91,11 +92,11 @@
             transform: translateX(-50%);
             width: 90px;
             height: 18px;
-            background: linear-gradient(0deg, #220008, #0a0002);
+            background: linear-gradient(0deg, #0f1a3d, #050210);
             border-radius: 0 0 12px 12px;
-            border: 1.5px solid var(--neon-red);
+            border: 2px solid var(--neon-blue);
             border-top: none;
-            box-shadow: 0 5px 10px rgba(255,0,60,0.2);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
             z-index: -1;
         }
 
@@ -106,55 +107,63 @@
             padding-bottom: 8px;
             cursor: move;
             margin-bottom: 6px;
-            border-bottom: 1px solid rgba(255, 0, 60, 0.4);
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
         }
 
         .brand-title {
             font-weight: 900;
             font-size: 11px;
             color: var(--neon-gold);
-            text-shadow: 0 0 8px var(--neon-gold);
-            letter-spacing: 1px;
+            text-shadow: 0 0 15px var(--neon-gold), 0 0 30px var(--neon-blue);
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
             gap: 5px;
+            animation: titleGlow 2s ease-in-out infinite;
         }
 
         .brand-title::before {
             content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--neon-red);
+            width: 8px;
+            height: 8px;
+            background: var(--neon-blue);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--neon-red);
+            box-shadow: 0 0 15px var(--neon-blue);
+            animation: dotPulse 1.5s infinite;
         }
 
         #cls-btn {
-            color: var(--neon-red);
+            color: var(--neon-blue);
             font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            text-shadow: 0 0 5px var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-blue);
+            transition: 0.2s;
+        }
+
+        #cls-btn:hover {
+            text-shadow: 0 0 20px var(--neon-blue), 0 0 40px rgba(0, 212, 255, 0.6);
         }
 
         .display-bezel {
             width: 100%;
             height: 105px;
-            background: #0a0002;
+            background: #050210;
             border-radius: 12px;
             padding: 4px;
-            border: 1.5px solid var(--neon-red);
-            box-shadow: 0 0 10px rgba(255,0,60,0.3), inset 0 0 20px rgba(255,0,60,0.2);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), inset 0 0 30px rgba(0, 212, 255, 0.2), 0 0 40px var(--neon-blue);
             position: relative;
         }
 
         .screen {
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #220005 0%, var(--dark-bg) 100%);
+            background: radial-gradient(circle at center, #1a0a40 0%, var(--dark-bg) 100%);
             border-radius: 8px;
-            border: 1px solid rgba(255, 0, 60, 0.5);
-            box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.3);
+            border: 1px solid var(--neon-blue);
+            box-shadow: inset 0 0 25px rgba(0, 212, 255, 0.3), inset 0 0 50px rgba(0, 212, 255, 0.1);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -167,9 +176,10 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 2px);
+            background: repeating-linear-gradient(0deg, rgba(0, 212, 255, 0.15) 0px, rgba(0, 212, 255, 0.15) 1px, transparent 1px, transparent 2px);
             pointer-events: none;
-            opacity: 0.5;
+            opacity: 0.8;
+            animation: scanlines 8s linear infinite;
         }
 
         .screen-top {
@@ -184,29 +194,29 @@
 
         .status-led {
             font-size: 9px;
-            color: var(--neon-red);
+            color: var(--neon-blue);
             font-weight: 700;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 4px;
-            text-shadow: 0 0 5px var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-blue);
         }
 
         .led-dot {
-            width: 5px;
-            height: 5px;
-            background: var(--neon-red);
+            width: 6px;
+            height: 6px;
+            background: var(--neon-blue);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--neon-red);
-            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 12px var(--neon-blue);
+            animation: pulse 1s infinite;
         }
 
         .period-badge {
             font-family: 'Space Mono', monospace;
             font-size: 7.5px;
-            color: #fff;
-            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+            color: var(--neon-gold);
+            text-shadow: 0 0 10px var(--neon-gold);
             white-space: nowrap;
         }
 
@@ -214,13 +224,14 @@
             font-weight: 900;
             font-size: 24px;
             color: var(--neon-gold);
-            text-shadow: 0 0 15px var(--neon-gold);
+            text-shadow: 0 0 20px var(--neon-gold), 0 0 40px var(--neon-blue);
             z-index: 10;
             text-align: center;
             white-space: nowrap;
             letter-spacing: 2px;
             margin-top: 4px;
             line-height: 1.2;
+            animation: textGlow 2s ease-in-out infinite;
         }
 
         .screen-bottom {
@@ -233,17 +244,17 @@
             font-size: 8px;
             color: var(--neon-gold);
             letter-spacing: 1px;
-            text-shadow: 0 0 5px var(--neon-gold);
+            text-shadow: 0 0 10px var(--neon-gold), 0 0 20px var(--neon-blue);
         }
 
         .loading-laser {
             position: absolute;
             top: 0;
             left: -10%;
-            width: 2px;
+            width: 3px;
             height: 100%;
-            background: #fff;
-            box-shadow: 0 0 15px 5px var(--neon-red);
+            background: linear-gradient(90deg, transparent, var(--neon-gold), transparent);
+            box-shadow: 0 0 20px 8px var(--neon-blue);
             z-index: 8;
             opacity: 0;
         }
@@ -263,9 +274,9 @@
 
         .watch-btn {
             flex: 3;
-            background: linear-gradient(180deg, #1a0005, #000);
-            border: 1px solid #4d0012;
-            border-top: 1.5px solid #ff4d79;
+            background: linear-gradient(180deg, #0f1a3d, #050210);
+            border: 2px solid #00d4ff;
+            border-top: 2px solid #00ffff;
             border-radius: 8px;
             color: var(--neon-gold);
             font-family: 'Orbitron', sans-serif;
@@ -273,70 +284,85 @@
             font-size: 10px;
             letter-spacing: 1px;
             cursor: pointer;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-            transition: 0.15s;
+            text-shadow: 0 0 15px var(--neon-gold), 0 0 10px var(--neon-blue);
+            transition: 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3), inset 0 0 10px rgba(0, 212, 255, 0.1);
+        }
+
+        .watch-btn:hover {
+            box-shadow: 0 0 30px var(--neon-blue), 0 0 50px rgba(0, 212, 255, 0.4), inset 0 0 15px rgba(0, 212, 255, 0.2);
         }
 
         .watch-btn:active {
             transform: scale(0.95);
-            background: var(--neon-red);
+            background: linear-gradient(180deg, #00d4ff, #0088cc);
             color: #fff;
-            border-color: var(--neon-red);
+            border-color: var(--neon-blue);
             text-shadow: none;
-            box-shadow: 0 0 15px var(--neon-red);
+            box-shadow: 0 0 30px var(--neon-blue), 0 0 60px rgba(0, 212, 255, 0.6);
         }
 
         .btn-secondary {
             flex: 2;
-            color: #ccc;
-            border-top: 1.5px solid #888;
-            background: linear-gradient(180deg, #111, #000);
-            text-shadow: none;
+            color: var(--neon-blue);
+            border-top: 2px solid var(--neon-gold);
+            background: linear-gradient(180deg, #0a1a2e, #050210);
+            text-shadow: 0 0 10px var(--neon-blue);
+            box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.1);
         }
 
         .btn-tg {
             flex: 1;
-            background: rgba(255, 0, 60, 0.1);
-            border: 1px solid #ff003c;
-            border-top: 1.5px solid #ff4d79;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--neon-blue);
+            border-top: 2px solid var(--neon-gold);
             border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.15s;
-            box-shadow: inset 0 0 10px rgba(255,0,60,0.2);
+            transition: 0.2s;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2), inset 0 0 10px rgba(0, 212, 255, 0.1);
+        }
+
+        .btn-tg:hover {
+            box-shadow: 0 0 30px var(--neon-blue), inset 0 0 15px rgba(0, 212, 255, 0.2);
         }
 
         .btn-tg svg {
             width: 16px;
             height: 16px;
             fill: var(--neon-gold);
-            filter: drop-shadow(0 0 5px var(--neon-gold));
+            filter: drop-shadow(0 0 8px var(--neon-blue));
         }
 
         .btn-tg:active {
             transform: scale(0.92);
-            background: var(--neon-red);
+            background: var(--neon-blue);
+            box-shadow: 0 0 40px var(--neon-blue), 0 0 80px rgba(0, 212, 255, 0.6);
         }
 
         .btn-tg:active svg {
             fill: #fff;
-            filter: none;
+            filter: drop-shadow(0 0 10px #fff);
         }
 
         @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.9); }
+            0% { opacity: 0; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1); }
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 30px var(--neon-blue), 0 0 60px rgba(0, 212, 255, 0.5), 0 10px 20px rgba(0,0,0,0.9); }
+            50% { box-shadow: 0 0 50px var(--neon-blue), 0 0 100px rgba(0, 212, 255, 0.7), 0 10px 20px rgba(0,0,0,0.9); }
         }
 
         @keyframes pulse {
@@ -347,6 +373,32 @@
         @keyframes horizontalScan {
             0% { left: -10%; }
             100% { left: 110%; }
+        }
+
+        @keyframes mainGlow {
+            0%, 100% { box-shadow: 0 0 40px var(--neon-blue), 0 0 80px rgba(0, 212, 255, 0.4), 0 20px 50px rgba(0,0,0,0.9), inset 0 0 30px rgba(0, 212, 255, 0.2); }
+            50% { box-shadow: 0 0 60px var(--neon-blue), 0 0 120px rgba(0, 212, 255, 0.6), 0 20px 50px rgba(0,0,0,0.9), inset 0 0 40px rgba(0, 212, 255, 0.3); }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 15px var(--neon-gold), 0 0 30px var(--neon-blue); }
+            50% { text-shadow: 0 0 25px var(--neon-gold), 0 0 50px var(--neon-blue); }
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 20px var(--neon-gold), 0 0 40px var(--neon-blue); }
+            50% { text-shadow: 0 0 30px var(--neon-gold), 0 0 60px var(--neon-blue); }
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { box-shadow: 0 0 15px var(--neon-blue); }
+            50% { box-shadow: 0 0 25px var(--neon-blue); }
+        }
+
+        @keyframes scanlines {
+            0% { opacity: 0.8; }
+            50% { opacity: 0.5; }
+            100% { opacity: 0.8; }
         }
 
         .blink {
@@ -449,14 +501,14 @@
                     TeamBridge.playSound('teacher_slex300.mp3');
                     depositPlayed = true;
                 }
-                screen.innerHTML = "<div class='screen-top'><div class='status-led'><span class='led-dot'></span> DENIED</div><div class='period-badge'>ERR</div></div><div class='res-big' style='font-size:20px; color:var(--neon-red); text-shadow:0 0 15px var(--neon-red);'>LOW BAL</div><div class='screen-bottom'><div class='terminal-text' style='color:var(--neon-red);'>DEPOSIT ₹200+</div></div>";
+                screen.innerHTML = "<div class='screen-top'><div class='status-led'><span class='led-dot'></span> DENIED</div><div class='period-badge'>ERR</div></div><div class='res-big' style='font-size:20px; color:var(--neon-blue); text-shadow:0 0 15px var(--neon-blue), 0 0 30px var(--neon-gold);'>LOW BAL</div><div class='screen-bottom'><div class='terminal-text' style='color:var(--neon-blue);'>DEPOSIT ₹200+</div></div>";
                 b1.innerHTML = "<button class='watch-btn' onclick=\"TeamBridge.loadUrl('https://www.92pak14.com/#/wallet/Recharge')\">DEPOSIT NOW</button>";
                 b2.style.display = 'none';
             }
             else {
                 depositPlayed = false;
                 if (state === 'wingo') {
-                    screen.innerHTML = "<div class='screen-top'><div class='status-led' style='color:#777;'><span class='led-dot' style='background:#777; box-shadow:none;'></span> STANDBY</div><div class='period-badge'>ID: -----</div></div><div class='res-big' style='font-size:20px;'>[ READY ]</div><div class='screen-bottom'><div class='terminal-text'>AWAITING INPUT<span class='blink'>_</span></div></div>";
+                    screen.innerHTML = "<div class='screen-top'><div class='status-led' style='color:#00d4ff;'><span class='led-dot' style='background:#00d4ff; box-shadow:0 0 12px #00d4ff;'></span> STANDBY</div><div class='period-badge'>ID: -----</div></div><div class='res-big' style='font-size:20px;'>[ READY ]</div><div class='screen-bottom'><div class='terminal-text'>AWAITING INPUT<span class='blink'>_</span></div></div>";
                     b1.innerHTML = "<button class='watch-btn' onclick='start()'>" + mainActionText + "</button>";
                     b2.style.display = 'flex';
                     b2.innerHTML = btnRow2;
